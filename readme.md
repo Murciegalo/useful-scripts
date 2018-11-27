@@ -1,6 +1,6 @@
 ## Useful Scripts
 
-A collection of bash scripts to help developer in their dayly working.
+A collection of bash scripts to help developer in their daily working.
 
 ### General Scripts
 
@@ -22,5 +22,3 @@ alias-create -f aliases_profile
 ```bash
 source ~./.bash_profile
 ```
-
-### Liferay Scripts
