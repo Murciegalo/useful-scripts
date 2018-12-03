@@ -1,4 +1,0 @@
-ssh-iot-lr-test='ssh liferay7@94.84.188.103'
-tun-iot-lr-db-test='ssh -f liferay7@94.84.188.103 -L 15432:172.20.20.4:5432 -N'
-tun-iot-cass-test='ssh -f liferay7@94.84.188.103 -L 19042:172.20.20.5:9042 -N'
-tun-iot-dcx-test='ssh -f liferay7@94.84.188.114 -L 19042:172.20.20.5:9042 -N'
