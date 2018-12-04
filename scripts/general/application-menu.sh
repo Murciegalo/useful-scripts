@@ -1,8 +1,8 @@
 #!/bin/bash
 
-APPLICATION_DESKTOP_PATH="/usr/share/application/"
+APPLICATION_DESKTOP_PATH="/usr/share/applications/"
 APPLICATION_NAME=$1
-APPLICATION_DESKTOP_FILE="$APPLICATION_NAME$APPLICATION_NAME.desktop"
+APPLICATION_DESKTOP_FILE="$APPLICATION_DESKTOP_PATH$APPLICATION_NAME.desktop"
 PARAMS=""
 
 while (( "$#" )); do
@@ -27,12 +27,17 @@ while (( "$#" )); do
       TYPE=$2
       shift 2
       ;;
+    -k|--keywords)
+      KEYWORDS=$2
+      shift 2
+      ;;
     -h|--help)
       echo "-c --comment"
       echo "-g --generic-name"
       echo "-e --exec"
       echo "-i --icon"
-      echo "-t --type"
+      echo "-t --type : application categories (splitted by ';')"
+      echo "-k --keywords : application keywords (splitted by ';')"
       shift 1
       ;;
     --) # end argument parsing
@@ -52,14 +57,21 @@ done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
 
+if [ -n "$APPLICATION_NAME" ]; then
+
+echo "Creating file: $APPLICATION_DESKTOP_FILE"
+
 cat > "$APPLICATION_DESKTOP_FILE" << _EOF_
 [Desktop Entry]
-Name="$APPLICATION_NAME"
-Comment="$COMMENT"
-GenericName="$GENERCI_NAME"
-Exec="$EXEC"
-Icon="$ICON"
-Type="$TYPE"
+Name=${APPLICATION_NAME^}
+Comment=$COMMENT
+GenericName=$GENERIC_NAME
+Exec=$EXEC
+Icon=$ICON
+Type=Application
+Categories=$TYPE
+Keywords=$KEYWORDS
 StartupNotify=true
 _EOF_
+fi
 
