@@ -6,6 +6,8 @@ shopt -s expand_aliases
 # definiti all'interno di un file passato come parametro o 
 # presente all'interno della cartella corrente.
 # Gli alias vengono creati per l'utente corrente.
+# Lo script per il momento è stato testato esclusivamente su 
+# Fedora 29
 #
 # Srtuttura del comando:
 #
