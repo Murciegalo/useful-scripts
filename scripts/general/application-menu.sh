@@ -63,7 +63,7 @@ echo "Creating file: $APPLICATION_DESKTOP_FILE"
 
 cat > "$APPLICATION_DESKTOP_FILE" << _EOF_
 [Desktop Entry]
-Name=${APPLICATION_NAME^}
+Name=$GENERIC_NAME
 Comment=$COMMENT
 GenericName=$GENERIC_NAME
 Exec=$EXEC

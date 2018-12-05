@@ -5,7 +5,7 @@ shopt -s expand_aliases
 # Lo script consente di creare in una sola volta più alias 
 # definiti all'interno di un file passato come parametro o 
 # presente all'interno della cartella corrente.
-# Gli alias vengono create per l'utente corrente.
+# Gli alias vengono creati per l'utente corrente.
 #
 # Srtuttura del comando:
 #
@@ -25,7 +25,7 @@ shopt -s expand_aliases
 PARAMS=""
 TEMPORARY=0
 FILE=""
-BASH_PROFILE_FILE=${HOME}/.bash_profile
+BASH_PROFILE_FILE=${HOME}/.bashrc
 
 while (( "$#" )); do
   case "$1" in
