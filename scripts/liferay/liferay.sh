@@ -58,6 +58,7 @@ function createPortalExtFile() {
 cat > $LR_HOME/portal-ext.properties << _EOF_
 include-and-override=$LR_HOME/portal-developer.properties
 include-and-override=$LR_HOME/portal-database.properties
+include-and-override=$LR_HOME/portal-runtime.properties
 _EOF_
 }
 
@@ -69,6 +70,11 @@ jdbc.default.url=jdbc:postgresql://localhost:5432/$DATABASE_NAME
 jdbc.default.username=$DATABASE_USERNAME
 jdbc.default.password=$DATABASE_USER_PASSWORD
 _EOF_
+}
+
+function createPortalRuntimeFile() {
+
+  touch $LR_HOME/portal-runtime.properties
 }
 
 function createPortalDelevoerFile() {
@@ -109,7 +115,7 @@ _EOF_
 
 function setupBundleDebugAndTunning() {
 
-cat > $LR_HOME/setenv.sh << _EOF_
+cat > $LIFERAY_TOMCAT_HOME/bin/setenv.sh << _EOF_
 REMOTE_DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,address=8002,server=y,suspend=n"
 CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false -Duser.timezone=GMT -Xmx4096m $REMOTE_DEBUG"
 _EOF_
@@ -162,11 +168,20 @@ setup() {
 
   unzip "bundles/$LR_SELECTED_BUNDLE" -d bundles &> /dev/null && rm "bundles/$LR_SELECTED_BUNDLE"
 
+  setLiferayHomeVariabiles
+
   createPortalExtFile
   createPortalDelevoerFile
+
+  if [ "$CREATE_DATABASE" -eq "1" ]; then
+    createPortalRuntimeFile
+  fi
+  
   setupBundleDebugAndTunning
 
   setupDatabase
+
+  echo "Warning! Before start liferay set your configuration into portal-runtime.properties"
 
 }
 
